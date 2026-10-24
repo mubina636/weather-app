@@ -305,33 +305,34 @@ class _HomescreenState extends State<Homescreen> {
     cubit = context.read<HomeCubit>()..loadCurrentWeather(city: 'Semarang');
   }
 
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
-         final status =state.statusof('currentWeather');
+          final status = state.statusof('currentWeather');
           final weather = state.weather;
-          final now =DateTime.now();
+          final now = DateTime.now();
           String _monthName(int month) {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
+            const months = [
+              'January',
+              'February',
+              'March',
+              'April',
+              'May',
+              'June',
+              'July',
+              'August',
+              'September',
+              'October',
+              'November',
+              'December',
+            ];
 
-  return months[month - 1];
-}
+            return months[month - 1];
+          }
 
           print('status: $status');
 
@@ -397,13 +398,15 @@ class _HomescreenState extends State<Homescreen> {
                               ),
                             ),
 
-                             Padding(
-                               padding: const EdgeInsets.only(top:100,right: 40),
-                               child: Image.asset('assets/images/sunbulit.png'),
-                             ),
-                        
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 100,
+                                right: 40,
+                              ),
+                              child: Image.asset('assets/images/sunbulit.png'),
+                            ),
 
-                           SizedBox(height: 100,),
+                            SizedBox(height: 100),
 
                             Container(
                               width: 350,
@@ -420,7 +423,7 @@ class _HomescreenState extends State<Homescreen> {
                                 children: [
                                   const SizedBox(height: 20),
 
-                                   Text(
+                                  Text(
                                     ' Today,${DateTime.now().day} ${_monthName(DateTime.now().month)}',
                                     style: TextStyle(
                                       color: Colors.white,
@@ -433,7 +436,7 @@ class _HomescreenState extends State<Homescreen> {
 
                                   // Температура
                                   Text(
-                                  '${weather?.temp.round()}',
+                                    '${weather?.temp.round()}',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 80,
@@ -441,8 +444,8 @@ class _HomescreenState extends State<Homescreen> {
                                     ),
                                   ),
 
-                                 Text(
-                                   weather?.main ??'' ,
+                                  Text(
+                                    weather?.main ?? '',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 22,
@@ -452,7 +455,7 @@ class _HomescreenState extends State<Homescreen> {
 
                                   const SizedBox(height: 25),
 
-                                   Row(
+                                  Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       SvgPicture.asset('assets/svg/windy.svg'),
@@ -474,7 +477,7 @@ class _HomescreenState extends State<Homescreen> {
                                       ),
                                       SizedBox(width: 15),
                                       Text(
-                                       '${((weather?.speed ?? 0)*3.6).toStringAsFixed(1)}km/h',
+                                        '${((weather?.speed ?? 0) * 3.6).toStringAsFixed(1)}km/h',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
@@ -507,7 +510,7 @@ class _HomescreenState extends State<Homescreen> {
                                       ),
                                       SizedBox(width: 24),
                                       Text(
-                                       '${weather?.humidity ?? 0}%',
+                                        '${weather?.humidity ?? 0}%',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
@@ -527,9 +530,122 @@ class _HomescreenState extends State<Homescreen> {
                             InkWell(
                               onTap: () {
                                 // context.push('/notification');
-                                showBottomSheet(context: context, builder: (context) {
-                                  return Container(color: Colors.amber,);
-                                },);
+                                showBottomSheet(
+                                
+                                  context: context,
+                                  builder: (context) {
+                                    return InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          isSelected = !isSelected;
+                                        });
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(30),
+                                          color: isSelected
+                                            ? Colors.black
+                                            : Colors.white,
+                                        ),
+                                        height: 400,
+                                       
+                                        
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 15,
+                                            vertical: 15,
+                                          ),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Your notification',
+                                                style: TextStyle(
+                                                  color: Color(0xff444E72),
+                                                ),
+                                              ),
+                                              Text('Newe'),
+                                              Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/svg/whitesun.svg',
+                                                    colorFilter:
+                                                        ColorFilter.mode(
+                                                          Color(0xff444E72),
+                                                          BlendMode.modulate,
+                                                        ),
+                                                  ),
+
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('10 minutes ago'),
+                                                      SizedBox(
+                                                        width: 254,
+                                                        height: 24,
+                                                        child: Text(
+                                                          'A sunny day in your location, consider wearing your UV protection',
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  InkWell(
+                                                    child: SvgPicture.asset(
+                                                      'assets/svg/down.svg',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text('Earlier'),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+
+                                                children: [
+                                                  SvgPicture.asset(
+                                                    'assets/svg/whitesun.svg',
+                                                    colorFilter:
+                                                        ColorFilter.mode(
+                                                          Color(0xff444E72),
+                                                          BlendMode.modulate,
+                                                        ),
+                                                  ),
+
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text('1 day ago'),
+
+                                                      SizedBox(
+                                                        width: 254,
+                                                        height: 24,
+                                                        child: Text(
+                                                          'A sunny day in your location, consider wearing your UV protection',
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  InkWell(
+                                                    child: SvgPicture.asset(
+                                                      'assets/svg/down.svg',
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                               child: Container(
                                 width: 220,
@@ -576,7 +692,11 @@ class _HomescreenState extends State<Homescreen> {
                       Positioned(
                         top: 450,
                         right: 100,
-                        child: SvgPicture.asset('assets/svg/tochka.svg',width: 40,height: 91,),
+                        child: SvgPicture.asset(
+                          'assets/svg/tochka.svg',
+                          width: 40,
+                          height: 91,
+                        ),
                       ),
                     ],
                   ),

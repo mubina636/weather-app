@@ -17,8 +17,11 @@ class NotificationCubit extends Cubit<NotificationState> {
           ),
         );
 
-  Future<void> loadNotification({required String city}) async {
+  Future<void> loadNotification({
+    required String city,
+  }) async {
     print('1. loadNotification started');
+    print('CITY: $city');
 
     emit(
       state.copyWith(
@@ -30,17 +33,19 @@ class NotificationCubit extends Cubit<NotificationState> {
     );
 
     try {
-      print('2. Request started');
+      print('2. Creating notification request');
 
       final request = Notificationrequestmodel(
         city: city,
         units: 'metric',
       );
 
+      print('3. Sending notification request');
+
       final notification = await getnotification(request);
 
-      print('3. Request success');
-      print('4. Before success emit');
+      print('4. Notification request successful');
+      print('5. Before success emit');
 
       emit(
         state.copyWith(
@@ -52,12 +57,18 @@ class NotificationCubit extends Cubit<NotificationState> {
         ),
       );
 
-      print('5. Success emitted');
-      print('6. Current status: ${state.statusOf('notification')}');
+      print('6. Success emitted');
+      print(
+        '7. Current status: '
+        '${state.statusOf('notification')}',
+      );
     } catch (e, stackTrace) {
-     
-      print('9. STACKTRACE:');
+      print('========== NOTIFICATION ERROR ==========');
+      print('ERROR TYPE: ${e.runtimeType}');
+      print('ERROR MESSAGE: $e');
+      print('STACKTRACE:');
       print(stackTrace);
+      print('========================================');
 
       emit(
         state.copyWith(
@@ -68,8 +79,7 @@ class NotificationCubit extends Cubit<NotificationState> {
         ),
       );
 
-      print('10. Error emitted');
-      print('11. Current status: ${state.statusOf('notification')}');
+      print('NOTIFICATION STATUS: ${state.statusOf('notification')}');
     }
   }
 }

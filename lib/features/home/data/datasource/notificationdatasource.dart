@@ -2,7 +2,6 @@ import 'package:weatherapp/core/network/apiclient.dart';
 import 'package:weatherapp/features/home/notification/model/notificationrequestmodel.dart';
 import 'package:weatherapp/features/home/notification/model/notificationresponcemodel.dart';
 
-
 class NotificationDatasource {
   final ApiClient apiClient;
 
@@ -16,6 +15,10 @@ class NotificationDatasource {
       queryParameters: request.toJson(),
     );
 
-    return Notificationresponcemodel.fromJson(response.data);
+    print('NOTIFICATION RESPONSE: ${response.data}');
+
+    return Notificationresponcemodel.fromJson(
+      Map<String, dynamic>.from(response.data as Map),
+    );
   }
 }

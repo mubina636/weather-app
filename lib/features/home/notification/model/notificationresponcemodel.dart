@@ -14,7 +14,7 @@ class Notificationresponcemodel {
   });
   factory Notificationresponcemodel.fromJson(Map<String, dynamic> json) {
     return Notificationresponcemodel(
-      description: (json['weather'[0]]['description']),
+      description: (json['weather'][0]['description']),
       temp: (json['main']['temp'] as num).toDouble(),
       speed: (json ['wind']['speed'] as num).toDouble(),
       humidity: (json['main']['humidity'] as int),
