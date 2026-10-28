@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,125 +14,170 @@ class Notificationpage extends StatefulWidget {
 }
 
 class _NotificationpageState extends State<Notificationpage> {
+  bool isSelected = false;
+
   @override
-   void initState(){
+  void initState() {
     super.initState();
-    context.read<NotificationCubit>().loadNotification(city:'Tashkent');
-   }
-   bool isSelected =false;
+
+    context
+        .read<NotificationCubit>()
+        .loadNotification(city: 'Tashkent');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:SafeArea(child:BlocBuilder<NotificationCubit,NotificationState>(builder: (context, state) {
-         final status=state.statusOf('notification');
-         print('NOTIFICATION UI STATUS: ${state.statusOf('notification')}');
-         if (status==Status.loading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-          
-         }
-         if (status==Status.error) {
-          
-           return Center(child: Text('yesjj'),);
-         }
-         if (status == Status.success) {
-           return   InkWell(
-                                onTap: () {
-                                 
-                                  showBottomSheet(
-                                    context: context,
-                                    builder: (context) {
-                                      return InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            isSelected=!isSelected;
-                                          });
-                                        },
-                                        child: Container(
-                                          width:double.infinity,
-                                          height: 300,
-                                          color:isSelected ? Colors.black : Colors.white,
-                                          child: Column(
-                                            children: [
-                                              Text('Your notification',style: TextStyle(color: Color(0xff444E72)),),
-                                              Text('New'),
-                                              Row(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'assets/svg/whitesun.svg',colorFilter:ColorFilter.mode(Color(0xff444E72),BlendMode.modulate),
-                                                  ),
-                                                  
-                                                Column(
-                                                  children: [
-                                                    Text('10 minutes ago'),
-                                                    SizedBox(
-                                                      width: 254,
-                                                      height: 24,
-                                                      child: Text('A sunny day in your location, consider wearing your UV protection'),),
-                                                    
-                                                  ],
-                                                ),
-                                                  InkWell(child: SvgPicture.asset('assets/svg/down.svg'))
-                                                ],
-                                              ),
-                                             Text('Earlier'),
-                                            Row(
-                                             
-                                          
-                                              children: [
-                                                SvgPicture.asset(
-                                                  'assets/svg/whitesun.svg',
-                                                ),
-                                                
-                                              Column(
-                                                children: [
-                                                  Text('1 day ago'),  
-                                                
-                                                  SizedBox(
-                                                    width: 254,
-                                                    height: 24,
-                                                    child: Text('A sunny day in your location, consider wearing your UV protection'),)
-                                                ],
-                                              ),
-                                                InkWell(child: SvgPicture.asset('assets/svg/down.svg'))
-                                              ],
-                                            ),
-                                          ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const Text(
+              'HI TEST 123',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 32,
+              ),
+            ),
+            BlocBuilder<NotificationCubit, NotificationState>(
+              builder: (context, state) {
+                final status = state.statusOf('notification');
+
+                print('NOTIFICATION UI STATUS: $status');
+
+                if (status == Status.loading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (status == Status.error) {
+                  return const Center(
+                    child: Text('yesjj'),
+                  );
+                }
+
+                if (status == Status.success) {
+                  return InkWell(
+                    onTap: () {
+                      showBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return InkWell(
+                            onTap: () {
+                              setState(() {
+                                isSelected = !isSelected;
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 300,
+                              color: isSelected
+                                  ? Colors.black
+                                  : Colors.white,
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    'Your notification',
+                                    style: TextStyle(
+                                      color: Color(0xff444E72),
+                                    ),
+                                  ),
+                                  const Text('New'),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/svg/whitesun.svg',
+                                        colorFilter:
+                                            const ColorFilter.mode(
+                                          Color(0xff444E72),
+                                          BlendMode.modulate,
                                         ),
                                       ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Container(
-                                width: 220,
-                                height: 64,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.white,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Text(
-                                      'Forecast report',
-                                      style: TextStyle(
-                                        color: Color(0xff444E72),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 18,
+                                      Column(
+                                        children: [
+                                          const Text('10 minutes ago'),
+                                          const SizedBox(
+                                            width: 254,
+                                            height: 24,
+                                            child: Text(
+                                              'A sunny day in your location, consider wearing your UV protection',
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    SvgPicture.asset('assets/svg/top.svg'),
-                                  ],
-                                ),
+                                      InkWell(
+                                        onTap: () {
+                                          context.push('/map');
+                                        },
+                                        child: SvgPicture.asset(
+                                          'assets/svg/down.svg',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text('Earlier3'),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        'assets/svg/whitesun.svg',
+                                      ),
+                                      const Column(
+                                        children: [
+                                          SizedBox(
+                                            width: 254,
+                                            height: 24,
+                                            child: Text(
+                                              'A sunny day in your location, consider wearing your UV protection',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      InkWell(
+                                        child: SvgPicture.asset(
+                                          'assets/svg/down.svg',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                            );
-                                 
-           };
-         return SizedBox.shrink();
-      },) )
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 220,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Forecast reporty',
+                            style: TextStyle(
+                              color: Color(0xff444E72),
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          SvgPicture.asset('assets/svg/top.svg'),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                return const SizedBox.shrink();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

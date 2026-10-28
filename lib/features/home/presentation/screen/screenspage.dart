@@ -374,7 +374,8 @@ class _HomescreenState extends State<Homescreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      SvgPicture.asset('assets/svg/map.svg'),
+                                      InkWell(onTap: () => context.push('/map'),
+                                      child: SvgPicture.asset('assets/svg/map.svg'),),
                                       const SizedBox(width: 15),
                                       const Text(
                                         'Semarang',
@@ -556,19 +557,26 @@ class _HomescreenState extends State<Homescreen> {
                                             vertical: 15,
                                           ),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                                
                                             children: [
-                                              Text(
-                                                'Your notification',
-                                                style: TextStyle(
-                                                  color: Color(0xff444E72),
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 26, bottom: 15,right:100),
+                                                child: Text(
+                                                  'Your notification',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 13,
+                                                    color: Color(0xff444E72),
+                                                  ),
                                                 ),
                                               ),
-                                              Text('Newe'),
+                                              Text('New', style: TextStyle(color: Color(0xff444E72),  fontWeight: FontWeight.w400),),
+                                              SizedBox(height: 15,),
                                               Row(
                                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
+                                                    SizedBox(height: 15,),
                                                   SvgPicture.asset(
                                                     'assets/svg/whitesun.svg',
                                                     colorFilter:
@@ -577,23 +585,25 @@ class _HomescreenState extends State<Homescreen> {
                                                           BlendMode.modulate,
                                                         ),
                                                   ),
+                                                    SizedBox(height: 15,),
 
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text('10 minutes ago'),
+                                                      Text('10 minutes ago',style: TextStyle(color: Color(0xff444E72),  fontWeight: FontWeight.w300)),
                                                       SizedBox(
                                                         width: 254,
                                                         height: 24,
                                                         child: Text(
-                                                          'A sunny day in your location, consider wearing your UV protection',
+                                                          'A sunny day in your location, consider wearing your UV protection',style: TextStyle(fontWeight: FontWeight.w700,),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                   InkWell(
+                                                    
                                                     child: SvgPicture.asset(
                                                       'assets/svg/down.svg',
                                                     ),
@@ -607,6 +617,7 @@ class _HomescreenState extends State<Homescreen> {
                                                         .spaceBetween,
 
                                                 children: [
+                                                   SizedBox(height: 14,),
                                                   SvgPicture.asset(
                                                     'assets/svg/whitesun.svg',
                                                     colorFilter:
@@ -615,7 +626,7 @@ class _HomescreenState extends State<Homescreen> {
                                                           BlendMode.modulate,
                                                         ),
                                                   ),
-
+                                         
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
