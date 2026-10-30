@@ -52,3 +52,8 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // ← вот сюда добавляем
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+}

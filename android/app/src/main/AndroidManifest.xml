@@ -1,4 +1,13 @@
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Location permissions -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:label="weatherapp"
         android:name="${applicationName}"
@@ -6,7 +15,7 @@
 
         <!-- Yandex MapKit API Key -->
         <meta-data
-            android:name="com.yandex.android.maps.apikey"
+            android:name="com.yandex.mapkit.maps.apikey"
             android:value="${YANDEX_MAPKIT_API_KEY}" />
 
         <activity
@@ -33,6 +42,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
 
     <queries>
@@ -41,4 +51,5 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+
 </manifest>

@@ -374,8 +374,12 @@ class _HomescreenState extends State<Homescreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      InkWell(onTap: () => context.push('/map'),
-                                      child: SvgPicture.asset('assets/svg/map.svg'),),
+                                      InkWell(
+                                        onTap: () => context.push('/map'),
+                                        child: SvgPicture.asset(
+                                          'assets/svg/map.svg',
+                                        ),
+                                      ),
                                       const SizedBox(width: 15),
                                       const Text(
                                         'Semarang',
@@ -394,7 +398,14 @@ class _HomescreenState extends State<Homescreen> {
                                       ),
                                     ],
                                   ),
-                                  SvgPicture.asset('assets/svg/notif.svg'),
+                                  InkWell(
+                                    onTap: () {
+                                      context.push('/detail');
+                                    },
+                                    child: SvgPicture.asset(
+                                      'assets/svg/notif.svg',
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -532,7 +543,6 @@ class _HomescreenState extends State<Homescreen> {
                               onTap: () {
                                 // context.push('/notification');
                                 showBottomSheet(
-                                
                                   context: context,
                                   builder: (context) {
                                     return InkWell(
@@ -543,25 +553,31 @@ class _HomescreenState extends State<Homescreen> {
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(30),
+                                          borderRadius: BorderRadius.circular(
+                                            30,
+                                          ),
                                           color: isSelected
-                                            ? Colors.black
-                                            : Colors.white,
+                                              ? Colors.black
+                                              : Colors.white,
                                         ),
                                         height: 400,
-                                       
-                                        
+
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 15,
                                             vertical: 15,
                                           ),
                                           child: Column(
-                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                                
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(top: 26, bottom: 15,right:100),
+                                                padding: const EdgeInsets.only(
+                                                  top: 26,
+                                                  bottom: 15,
+                                                  right: 100,
+                                                ),
                                                 child: Text(
                                                   'Your notification',
                                                   style: TextStyle(
@@ -571,12 +587,20 @@ class _HomescreenState extends State<Homescreen> {
                                                   ),
                                                 ),
                                               ),
-                                              Text('New', style: TextStyle(color: Color(0xff444E72),  fontWeight: FontWeight.w400),),
-                                              SizedBox(height: 15,),
+                                              Text(
+                                                'New',
+                                                style: TextStyle(
+                                                  color: Color(0xff444E72),
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                              SizedBox(height: 15),
                                               Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                    SizedBox(height: 15,),
+                                                  SizedBox(height: 15),
                                                   SvgPicture.asset(
                                                     'assets/svg/whitesun.svg',
                                                     colorFilter:
@@ -585,25 +609,37 @@ class _HomescreenState extends State<Homescreen> {
                                                           BlendMode.modulate,
                                                         ),
                                                   ),
-                                                    SizedBox(height: 15,),
+                                                  SizedBox(height: 15),
 
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text('10 minutes ago',style: TextStyle(color: Color(0xff444E72),  fontWeight: FontWeight.w300)),
+                                                      Text(
+                                                        '10 minutes ago',
+                                                        style: TextStyle(
+                                                          color: Color(
+                                                            0xff444E72,
+                                                          ),
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                        ),
+                                                      ),
                                                       SizedBox(
                                                         width: 254,
                                                         height: 24,
                                                         child: Text(
-                                                          'A sunny day in your location, consider wearing your UV protection',style: TextStyle(fontWeight: FontWeight.w700,),
+                                                          'A sunny day in your location, consider wearing your UV protection',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
                                                   ),
                                                   InkWell(
-                                                    
                                                     child: SvgPicture.asset(
                                                       'assets/svg/down.svg',
                                                     ),
@@ -617,7 +653,7 @@ class _HomescreenState extends State<Homescreen> {
                                                         .spaceBetween,
 
                                                 children: [
-                                                   SizedBox(height: 14,),
+                                                  SizedBox(height: 14),
                                                   SvgPicture.asset(
                                                     'assets/svg/whitesun.svg',
                                                     colorFilter:
@@ -626,7 +662,7 @@ class _HomescreenState extends State<Homescreen> {
                                                           BlendMode.modulate,
                                                         ),
                                                   ),
-                                         
+
                                                   Column(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
